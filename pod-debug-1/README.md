@@ -6,14 +6,23 @@
 
 ### Problem Context
 
-The pod spec described in `problem.yaml` creates a pod that will not immediately start as expected.
+The pod spec described in `problem.yaml` creates a pod meant to run the `alpine` image that will not immediately start
+as expected.
 
 
 ### Problem Setup
 
 Apply the `problem.yaml` spec to your cluster using the following command:
 
-`kubectl apply -f `
+```
+ubuntu@labsys:~$ wget -qO - https://raw.githubusercontent.com/RX-M/bust-a-kube/master/pod-debug-1/problem.yaml > pod-debug-1.yaml
+
+ubuntu@labsys:~$ kubectl apply -f pod-debug-1.yaml
+
+pod/debug-pod1 created
+
+ubuntu@labsys:~$
+```
 
 
 ### Solution Conditions
