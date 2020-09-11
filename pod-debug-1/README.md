@@ -13,7 +13,7 @@ runs as expected.
 Apply the `problem.yaml` manifest to your cluster using the following command:
 
 ```
-kubectl apply -f https://raw.githubusercontent.com/RX-M/bust-a-kube/master/pod-debug-1/problem.yaml > pod-debug-1.yaml
+kubectl apply -f https://raw.githubusercontent.com/RX-M/bust-a-kube/master/pod-debug-1/problem.yaml
 ```
 
 
