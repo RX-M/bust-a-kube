@@ -1,9 +1,7 @@
-# Bust-a-Kube
+# Problem 1 - Pods
 
 
-## Problem 1 - A broken pod
-
-### Solution
+## Solution
 
 After you apply the pod, use `kubectl get pods` to view the status. You will see that the pod is not ready, 
 and has a status of Init:ImagePullBackOff. Note that the "Init:" prefix implies that this is a failure with 
