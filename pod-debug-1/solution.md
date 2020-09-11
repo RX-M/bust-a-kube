@@ -3,9 +3,9 @@
 
 ## Solution
 
-After you apply the pod, use `kubectl get pods` to view the status. You will see that the pod is not ready, 
-and has a status of Init:ImagePullBackOff. Note that the "Init:" prefix implies that this is a failure with 
-the init contianer not one of the normal contianers in the pod.
+After you apply the pod, use `kubectl get pods` to view the status. You will see that the pod is not ready,
+and has a status of Init:ImagePullBackOff. Note that the "Init:" prefix implies that this is a failure with
+the init container not one of the normal containers in the pod.
 
 ```
 ubuntu@labsys:~$ kubectl get pods
@@ -16,8 +16,8 @@ debug-pod1   0/1     Init:ImagePullBackOff   0          43s
 ubuntu@labsys:~$
 ```
 
-Run `kubectl describe pod debug-pod1` and look at the events. You will see that the Kubelet was unable to pull 
-the specified image using the contianer manager:
+Run `kubectl describe pod debug-pod1` and look at the events. You will see that the Kubelet was unable to pull
+the specified image using the container manager:
 
 ```
 ubuntu@labsys:~$ kubectl describe pods debug-pod1
@@ -44,8 +44,9 @@ Events:
 ubuntu@labsys:~$
 ```
 
-Take a close look at the init contianer image name. If you check docker hub you will see that no such image exists. The init 
-container image name is incorrect/mis-formated. Change the image name to `alpine` or `alpine:latest` to correct the issue. 
+Take a close look at the init container image name. If you check docker hub you will see that no such image exists. The
+init  container image name is incorrect/mis-formated. Change the image name to `alpine` or `alpine:latest` to correct
+the issue.
 
 ```
 ubuntu@labsys:~$ nano pod-debug-1.yaml && cat pod-debug-1.yaml
@@ -59,7 +60,7 @@ metadata:
 spec:
   initContainers:
   - name: init-container
-    image: alpine:latest 
+    image: alpine:latest
 
     command: ["/bin/sh", "-c"]
     args: ["echo hello"]
@@ -72,8 +73,8 @@ spec:
 ubuntu@labsys:~$
 ```
 
-You can only edit some of the fields in running pods, and image is not one of them. To apply the fix you will need to 
-delete the pod and recreate it. If this pod were created by a deployment or another controller, updating the pod spec 
+You can only edit some of the fields in running pods, and image is not one of them. To apply the fix you will need to
+delete the pod and recreate it. If this pod were created by a deployment or another controller, updating the pod spec
 in the parent resource would perform the update for you.
 
 ```
@@ -99,7 +100,7 @@ debug-pod1   1/1     Running   0          36s
 ubuntu@labsys:~$
 ```
 
-You can display the pod logs with `kubectl logs` to verify the log output from the init contianer.
+You can display the pod logs with `kubectl logs` to verify the log output from the init container.
 
 
 <br>
