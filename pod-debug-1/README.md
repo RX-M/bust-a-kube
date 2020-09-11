@@ -1,17 +1,14 @@
-# Bust-a-Kube
+# Problem 1 - Pods
 
 
-## Problem 1 - A broken pod
-
-
-### Problem Context
+## Context
 
 The pod defined in `problem.yaml` creates a pod meant to run a perpetual tail command in the `busybox` image. The 
 pod does not run as expected. Apply the manifest to your cluster, identify the problem and repair it so that the pod 
 runs as expected.
 
 
-### Problem Setup
+## Setup
 
 Apply the `problem.yaml` manifest to your cluster using the following command:
 
@@ -20,7 +17,7 @@ kubectl apply -f https://raw.githubusercontent.com/RX-M/bust-a-kube/master/pod-d
 ```
 
 
-### Solution Conditions
+## Solution Conditions
 
 The pod must be in the running state with all containers ready for this problem to be considered resolved.
 
