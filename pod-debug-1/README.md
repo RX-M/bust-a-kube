@@ -6,22 +6,17 @@
 
 ### Problem Context
 
-The pod spec described in `problem.yaml` creates a pod meant to run the `alpine` image that will not immediately start
-as expected.
+The pod defined in `problem.yaml` creates a pod meant to run a perpetual tail command in the `busybox` image. The 
+pod does not run as expected. Apply the manifest to your cluster, identify the problem and repair it so that the pod 
+runs as expected.
 
 
 ### Problem Setup
 
-Apply the `problem.yaml` spec to your cluster using the following command:
+Apply the `problem.yaml` manifest to your cluster using the following command:
 
 ```
-ubuntu@labsys:~$ wget -qO - https://raw.githubusercontent.com/RX-M/bust-a-kube/master/pod-debug-1/problem.yaml > pod-debug-1.yaml
-
-ubuntu@labsys:~$ kubectl apply -f pod-debug-1.yaml
-
-pod/debug-pod1 created
-
-ubuntu@labsys:~$
+kubectl apply -f https://raw.githubusercontent.com/RX-M/bust-a-kube/master/pod-debug-1/problem.yaml > pod-debug-1.yaml
 ```
 
 
