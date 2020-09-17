@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: bak-pv
+spec:
+  capacity:
+    storage: 100Mi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/tmp/tmpweb/"
+  storageClassName: static
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: bak-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-server
+spec:
+  containers:
+    - name: test-server
+      image: https
+      volumeMounts:
+      - mountPath: "/var/www/"
+        name: test-webpages
+  volumes:
+    - name: test-webpages
+      persistentVolumeClaim:
+        claimName: bak-pvc
