@@ -15,7 +15,7 @@ pod-debug-2   0/2     Pending   0          67s
 ubuntu@labsys:~$
 ```
 
-Run `kubectl describe pod debug-pod1` and look at the events. you will see that the pod is still in a Pending state
+Run `kubectl describe pod debug-pod1` and look at the events. you will see that the pod is still in a `Pending` state
 because the scheduler could not find a node that matched the desired node selector:
 
 ```
