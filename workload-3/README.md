@@ -4,8 +4,8 @@
 ## Context
 
 The pod spec provided in `problem.yaml` creates a pod running the Apache webserver that is meant to run with the
-Guaranteed QOS Class. However, when the pod is created it is assigned the `Burstable` QOS class. Apply the manifest to
-your cluster, identify the problem and repair it so that the pod runs with the `Guaranteed` QOS class.
+Guaranteed QOS Class. However, when the pod is created it is assigned the `Burstable` QoS class. Apply the manifest to
+your cluster, identify the problem and repair it so that the pod runs with the `Guaranteed` QoS class.
 
 
 ## Setup
