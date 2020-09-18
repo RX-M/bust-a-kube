@@ -7,19 +7,19 @@ After you apply `problem.yaml`, use `kubectl get pods` to view the status. You w
 state:
 
 ```
-ubuntu@ip-172-31-3-67:~/volume-debug1$ kubectl get pods
+ubuntu@labsys:~$ kubectl get pods
 
 NAME          READY   STATUS    RESTARTS   AGE
 test-server   0/1     Pending   0          7s
 
-ubuntu@ip-172-31-3-67:~/volume-debug1$
+ubuntu@labsys:~$
 ```
 
 To get more information, use `kubectl describe pod` on `test-server` to see if there are any relevant events or other
 information that could help debug the issue:
 
 ```
-ubuntu@ip-172-31-3-67:~/volume-debug1$ kubectl describe pods test-server
+ubuntu@labsys:~$ kubectl describe pods test-server
 
 Name:         test-server
 Namespace:    default
@@ -61,7 +61,7 @@ Events:
   Warning  FailedScheduling  12s         0/2 nodes are available: 2 pod has unbound immediate PersistentVolumeClaims.
   Warning  FailedScheduling  12s         0/2 nodes are available: 2 pod has unbound immediate PersistentVolumeClaims.
 
-ubuntu@ip-172-31-3-67:~/volume-debug1$
+ubuntu@labsys:~$
 ```
 
 According to the events, there is an unbound PersistentVolumeClaim. If you examine the describe output, you will see
@@ -69,7 +69,7 @@ that the pod is using a pvc named `bak-pvc`. Use `kubectl describe pvc` on it to
 you can get:
 
 ```
-ubuntu@ip-172-31-3-67:~/volume-debug1$ kubectl describe pvc bak-pvc
+ubuntu@labsys:~$ kubectl describe pvc bak-pvc
 
 Name:          bak-pvc
 Namespace:     default
@@ -88,7 +88,7 @@ Events:
   ----    ------         ----              ----                         -------
   Normal  FailedBinding  9s (x2 over 22s)  persistentvolume-controller  no persistent volumes available for this claim and no storage class is set
 
-ubuntu@ip-172-31-3-67:~/volume-debug1$
+ubuntu@labsys:~$
 ```
 
 So according to the PVC, there are no persistent volumes available for the claim, and there is no storage class set. But
@@ -96,12 +96,12 @@ when you applied the problem, the PV was created. Use `kubectl get` or `kubectl 
 information:
 
 ```
-ubuntu@ip-172-31-3-67:~/volume-debug1$ kubectl get pv
+ubuntu@labsys:~$ kubectl get pv
 
 NAME     CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS   REASON   AGE
 bak-pv   100Mi      RWO            Retain           Available           static                  27s
 
-ubuntu@ip-172-31-3-67:~/volume-debug1$
+ubuntu@labsys:~$
 ```
 
 Based on this output, you can conclude that:
@@ -120,9 +120,9 @@ Retrieve a YAML copy of the PVC from the cluster with `kubectl get` and the `-o 
 - Remove the `status` section and any keys below it
 
 ```
-ubuntu@ip-172-31-3-67:~/volume-debug1$ kubectl get pvc bak-pvc -o yaml > bak-pvc-fix.yaml
+ubuntu@labsys:~$ kubectl get pvc bak-pvc -o yaml > bak-pvc-fix.yaml
 
-ubuntu@ip-172-31-3-67:~/volume-debug1$ nano bak-pvc-fix.yaml && cat bak-pvc-fix.yaml
+ubuntu@labsys:~$ nano bak-pvc-fix.yaml && cat bak-pvc-fix.yaml
 
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -137,7 +137,7 @@ spec:
   volumeMode: Filesystem
   storageClassName: static
 
-ubuntu@ip-172-31-3-67:~/volume-debug1$
+ubuntu@labsys:~$
 ```
 
 If you have any trouble, use the spec above as a reference for your changes. Once your YAML file is prepared, use
@@ -145,32 +145,32 @@ If you have any trouble, use the spec above as a reference for your changes. Onc
 remove the existing instance of the object from your cluster:
 
 ```
-ubuntu@ip-172-31-3-67:~/volume-debug1$ kubectl delete -f bak-pvc-fix.yaml
+ubuntu@labsys:~$ kubectl delete -f bak-pvc-fix.yaml
 
 persistentvolumeclaim "bak-pvc" deleted
 
-ubuntu@ip-172-31-3-67:~/volume-debug1$ kubectl apply -f bak-pvc-fix.yaml
+ubuntu@labsys:~$ kubectl apply -f bak-pvc-fix.yaml
 
 persistentvolumeclaim/bak-pvc created
 
-ubuntu@ip-172-31-3-67:~/volume-debug1$
+ubuntu@labsys:~$
 ```
 
 Once you recreate the PVC, check its status. The `bak-pvc` is now `Bound` and the pod will eventually go into the
 `Running` status.
 
 ```
-ubuntu@ip-172-31-3-67:~/volume-debug1$ kubectl get pvc
+ubuntu@labsys:~$ kubectl get pvc
 
 NAME      STATUS   VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE
 bak-pvc   Bound    bak-pv   100Mi      RWO            static         6s
 
-ubuntu@ip-172-31-3-67:~/volume-debug1$ kubectl get pods
+ubuntu@labsys:~$ kubectl get pods
 
 NAME          READY   STATUS    RESTARTS   AGE
 test-server   1/1     Running   0          101s
 
-ubuntu@ip-172-31-3-67:~/volume-debug1$
+ubuntu@labsys:~$
 ```
 
 The pod is in the `Running` state with all containers Ready. Consider the issue resolved!

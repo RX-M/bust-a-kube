@@ -165,6 +165,9 @@ pod-debug-2   2/2     Running   0          2m2s
 ubuntu@labsys:~$
 ```
 
+The pod is in the running state with all containers ready; consider this problem resolved!
+
+
 <br>
 
 _Copyright (c) 2020 RX-M LLC, Cloud Native Consulting, all rights reserved_

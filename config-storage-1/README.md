@@ -14,7 +14,7 @@ cluster, identify the problem and repair it so that the pod schedules and runs a
 Apply the `problem.yaml` spec to your cluster using the following command:
 
 ```
-kubectl apply -f https://raw.githubusercontent.com/RX-M/bust-a-kube/master/storage-debug-1/problem.yaml
+kubectl apply -f https://raw.githubusercontent.com/RX-M/bust-a-kube/master/config-storage-1/problem.yaml
 ```
 
 

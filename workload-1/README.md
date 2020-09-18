@@ -3,8 +3,8 @@
 
 ## Context
 
-The pod defined in `problem.yaml` creates a pod meant to run a perpetual tail command in the `busybox` image. The 
-pod does not run as expected. Apply the manifest to your cluster, identify the problem and repair it so that the pod 
+The pod defined in `problem.yaml` creates a pod meant to run a perpetual tail command in the `busybox` image. The
+pod does not run as expected. Apply the manifest to your cluster, identify the problem and repair it so that the pod
 runs as expected.
 
 
@@ -13,7 +13,7 @@ runs as expected.
 Apply the `problem.yaml` manifest to your cluster using the following command:
 
 ```
-kubectl apply -f https://raw.githubusercontent.com/RX-M/bust-a-kube/master/pod-debug-1/problem.yaml
+kubectl apply -f https://raw.githubusercontent.com/RX-M/bust-a-kube/master/workload-1/problem.yaml
 ```
 
 

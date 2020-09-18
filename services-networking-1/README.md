@@ -14,7 +14,7 @@ problem and repair it so that the pods are accessible through the service as exp
 Apply the `problem.yaml` spec to your cluster using the following command:
 
 ```
-kubectl apply -f https://raw.githubusercontent.com/RX-M/bust-a-kube/master/svc-debug-1/problem.yaml
+kubectl apply -f https://raw.githubusercontent.com/RX-M/bust-a-kube/master/services-networking-1/problem.yaml
 ```
 
 

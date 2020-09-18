@@ -1,5 +1,6 @@
 # Problem 3 - Services
 
+
 ## Solution
 
 After you apply the problem.yaml spec, a deployment and service are created. If you use `kubectl get pods,svc` you will
@@ -281,6 +282,7 @@ Commercial support is available at
 
 ubuntu@labsys:~$
 ```
+
 
 <br>
 
