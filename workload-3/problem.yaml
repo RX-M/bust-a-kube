@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    role: frontend
+  name: frontend-stable
+spec:
+  containers:
+  - image: httpd
+    name: frontend-stable
+    ports:
+    - containerPort: 80
+    resources:
+      limits:
+        cpu: 300
+        memory: 512Mi
+      requests:
+        cpu: 300m
+        memorey: 512Mi
+  dnsPolicy: ClusterFirst
+  restartPolicy: OnFailure
