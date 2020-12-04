@@ -29,7 +29,7 @@ metadata:
 spec:
   containers:
     - name: test-server
-      image: https
+      image: httpd
       volumeMounts:
       - mountPath: "/var/www/"
         name: test-webpages
