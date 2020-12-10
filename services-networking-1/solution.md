@@ -7,7 +7,7 @@ After you apply the problem.yaml spec, a deployment and service are created. If 
 see that all of the pods and service are present in the current namespace:
 
 ```
-ubuntu@labsys:~$ kubectl apply -f https://raw.githubusercontent.com/RX-M/bust-a-kube/master/svc-debug-1/problem.yaml
+ubuntu@labsys:~$ kubectl apply -f https://raw.githubusercontent.com/RX-M/bust-a-kube/master/services-networking-1/problem.yaml
 
 deployment.apps/app-frontend created
 service/client-access created
@@ -121,7 +121,7 @@ You have two options here:
 Download the problem.yaml file and edit it so the service's `selector` uses `app=app-frontnend`:
 
 ```
-ubuntu@labsys:~$ wget -qO - https://raw.githubusercontent.com/RX-M/bust-a-kube/master/svc-debug-1/problem.yaml > svc-debug-1.yaml
+ubuntu@labsys:~$ wget -qO - https://raw.githubusercontent.com/RX-M/bust-a-kube/master/services-networking-1/problem.yaml > svc-debug-1.yaml
 
 ubuntu@labsys:~$ nano svc-debug-1.yaml && cat svc-debug-1.yaml
 
@@ -185,7 +185,7 @@ ubuntu@labsys:~$
 Download the problem.yaml file and add `context=frontend` to the deployment's pod template:
 
 ```
-ubuntu@labsys:~$ wget -qO - https://raw.githubusercontent.com/RX-M/bust-a-kube/master/svc-debug-1/problem.yaml > svc-debug-1.yaml
+ubuntu@labsys:~$ wget -qO - https://raw.githubusercontent.com/RX-M/bust-a-kube/master/services-networking-1/problem.yaml > svc-debug-1.yaml
 
 ubuntu@labsys:~$ nano svc-debug-1.yaml && cat svc-debug-1.yaml
 
