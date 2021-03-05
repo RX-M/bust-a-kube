@@ -286,6 +286,6 @@ ubuntu@labsys:~$
 
 <br>
 
-_Copyright (c) 2020 RX-M LLC, Cloud Native Consulting, all rights reserved_
+_Copyright (c) 2020-2021 RX-M LLC, Cloud Native Consulting, all rights reserved_
 
 [RX-M LLC]: https://rx-m.io/rxm-cnc.svg "RX-M LLC"

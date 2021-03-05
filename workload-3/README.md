@@ -23,6 +23,6 @@ The pod must be in the running state with all containers ready and have the `Gua
 
 <br>
 
-_Copyright (c) 2020 RX-M LLC, Cloud Native Consulting, all rights reserved_
+_Copyright (c) 2020-2021 RX-M LLC, Cloud Native Consulting, all rights reserved_
 
 [RX-M LLC]: https://rx-m.io/rxm-cnc.svg "RX-M LLC"
