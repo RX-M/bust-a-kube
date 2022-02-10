@@ -3,9 +3,9 @@
 
 ## Context
 
-The pod defined in `problem.yaml` creates a pod meant to run a perpetual tail command in the `busybox` image. The
-pod does not run as expected. Apply the manifest to your cluster, identify the problem and repair it so that the pod
-runs as expected.
+The pod defined in the `problem.yaml` below creates a pod meant to run a perpetual tail command in the `busybox` image.
+The pod, which runs an init container with the `alpine:latest` does not run as expected. Apply the manifest to your cluster,
+identify the problem and repair it so that the pod runs as expected.
 
 
 ## Setup
@@ -23,6 +23,6 @@ The pod must be in the running state with all containers ready for this problem 
 
 <br>
 
-_Copyright (c) 2020-2021 RX-M LLC, Cloud Native Consulting, all rights reserved_
+_Copyright (c) 2020-2022 RX-M LLC, Cloud Native Consulting, all rights reserved_
 
 [RX-M LLC]: https://rx-m.io/rxm-cnc.svg "RX-M LLC"
