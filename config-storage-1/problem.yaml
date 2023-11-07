@@ -30,6 +30,7 @@ spec:
   containers:
     - name: test-server
       image: httpd
+      imagePullPolicy: IfNotPresent
       volumeMounts:
       - mountPath: "/var/www/"
         name: test-webpages

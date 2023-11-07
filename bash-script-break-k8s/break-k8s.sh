@@ -30,11 +30,13 @@ spec:
   initContainers:
   - name: init-container
     image: ALPine
+    imagePullPolicy: IfNotPresent
     command: ["/bin/sh", "-c"]
     args: ["echo hello"]
   containers:
   - name: myapp-container
     image: busybox
+    imagePullPolicy: IfNotPresent
     command: ["/bin/sh", "-c"]
     args: ["tail -f /dev/null"]" > /tmp/debug-init.yaml
 

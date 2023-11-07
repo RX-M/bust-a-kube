@@ -7,6 +7,7 @@ metadata:
 spec:
   containers:
   - image: httpd
+    imagePullPolicy: IfNotPresent
     name: frontend-stable
     ports:
     - containerPort: 80

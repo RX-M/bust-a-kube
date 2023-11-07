@@ -16,6 +16,7 @@ spec:
     spec:
       containers:
       - image: nginx
+        imagePullPolicy: IfNotPresent
         name: nginx
 ---
 apiVersion: v1
