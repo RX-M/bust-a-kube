@@ -6,7 +6,7 @@ metadata:
   name: pod-debug-2
 spec:
   containers:
-  - image: centos/httpd
+  - image: httpd
     imagePullPolicy: IfNotPresent
     name: httpd
     volumeMounts:
