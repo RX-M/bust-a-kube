@@ -1,3 +1,5 @@
+![RX-M, llc.](https://rx-m.com/rxm-cnc.svg)
+
 # Break K8s Bash Script
 
 
@@ -31,6 +33,4 @@ wget -qO - https://raw.githubusercontent.com/RX-M/bust-a-kube/master/bash-script
 
 <br>
 
-_Copyright (c) 2020-2023 RX-M LLC, Cloud Native Consulting, all rights reserved_
-
-[RX-M LLC]: https://rx-m.io/rxm-cnc.svg "RX-M LLC"
+_Copyright (c) 2023-2024 RX-M LLC, Cloud Native & AI Training and Consulting, all rights reserved_
