@@ -1,4 +1,6 @@
-# Problem 6 - Application Access
+![RX-M, llc.](https://rx-m.com/rxm-cnc.svg)
+
+# Application Access
 
 
 ## Solution
@@ -145,5 +147,4 @@ spec:
 ```
 
 
-
-
+_Copyright (c) 2023-2024 RX-M LLC, Cloud Native & AI Training and Consulting, all rights reserved_

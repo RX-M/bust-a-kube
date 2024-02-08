@@ -1,4 +1,6 @@
-# Problem 6 - Application Access
+![RX-M, llc.](https://rx-m.com/rxm-cnc.svg)
+
+# Application Access - Solution
 
 
 ## Solution
@@ -6,13 +8,13 @@
 After applying the `problem.yaml`, check the pod status and logs. The pod is in a completed state, but when checking the
 pod logs an error is present:
 
-```
-ubuntu@ip-172-31-70-248:~$ kubectl get pods -n security-1
+```shell
+$ kubectl get pods -n security-1
 
 NAME                READY   STATUS      RESTARTS   AGE
 security-1-client   0/1     Completed   0          40s
 
-ubuntu@ip-172-31-70-248:~$ kubectl -n security-1 logs security-1-client
+$ kubectl -n security-1 logs security-1-client
 
 fetch http://dl-cdn.alpinelinux.org/alpine/v3.12/main/x86_64/APKINDEX.tar.gz
 fetch http://dl-cdn.alpinelinux.org/alpine/v3.12/community/x86_64/APKINDEX.tar.gz
@@ -40,7 +42,8 @@ OK: 7 MiB in 18 packages
   "code": 403
 100   336  100   336    0     0  56000      0 --:--:-- --:--:-- --:--:-- 56000
 }
-ubuntu@ip-172-31-70-248:~$
+
+$
 ```
 
 It looks like the permissions are not allowing the pod, which needs the `GET` and `LIST` rest permissions to properly
@@ -48,13 +51,13 @@ request a list of pods in its namespace.
 
 Identify the role in the pod's namespace and view its yaml spec:
 
-```
-ubuntu@ip-172-31-70-248:~$ kubectl get role -n security-1
+```shell
+$ kubectl get role -n security-1
 
 NAME       CREATED AT
 pod-crud   2020-12-09T00:24:44Z
 
-ubuntu@ip-172-31-70-248:~$ kubectl get role -n security-1 -o yaml
+$ kubectl get role -n security-1 -o yaml
 
 apiVersion: v1
 items:
@@ -93,19 +96,20 @@ kind: List
 metadata:
   resourceVersion: ""
   selfLink: ""
-ubuntu@ip-172-31-70-248:~$
+
+$
 ```
 
 The role only has the `CREATE` verb associated with it. You need to add the `GET` and `LIST` verbs to this role.
 
 Edit the role using `kubectl edit`:
 
-```
-ubuntu@ip-172-31-70-248:~$ kubectl edit role -n security-1 pod-crud
+```shell
+$ kubectl edit role -n security-1 pod-crud
 
 role.rbac.authorization.k8s.io/pod-crud edited
 
-ubuntu@ip-172-31-70-248:~$
+$
 ```
 
 While you make your edits, add `get` and `list` in the verbs for the pod permissions:
@@ -124,28 +128,28 @@ rules:
 
 Now take a backup of the running pod, delete it, and reapply.
 
-```
-ubuntu@ip-172-31-70-248:~$ kubectl get pod -n security-1 security-1-client -o yaml > security-1-client.yaml
+```shell
+$ kubectl get pod -n security-1 security-1-client -o yaml > security-1-client.yaml
 
-ubuntu@ip-172-31-70-248:~$ kubectl delete -f security-1-client.yaml
+$ kubectl delete -f security-1-client.yaml
 
 pod "security-1-client" deleted
 
-ubuntu@ip-172-31-70-248:~$ kubectl apply -f security-1-client.yaml
+$ kubectl apply -f security-1-client.yaml
 
 pod/security-1-client created
 
-ubuntu@ip-172-31-70-248:~$ kubectl get pods -n security-1 security-1-client
+$ kubectl get pods -n security-1 security-1-client
 NAME                READY   STATUS      RESTARTS   AGE
 security-1-client   0/1     Completed   0          10s
 
-ubuntu@ip-172-31-70-248:~$
+$
 ```
 
 If you check the log, you will see the full printout of the pod listing, as intended:
 
-```
-ubuntu@ip-172-31-70-248:~$ kubectl -n security-1 logs security-1-client
+```shell
+$ kubectl -n security-1 logs security-1-client
 fetch http://dl-cdn.alpinelinux.org/alpine/v3.12/main/x86_64/APKINDEX.tar.gz
 fetch http://dl-cdn.alpinelinux.org/alpine/v3.12/community/x86_64/APKINDEX.tar.gz
 (1/4) Installing ca-certificates (20191127-r4)
@@ -171,13 +175,11 @@ OK: 7 MiB in 18 packages
 
 }
 
-ubuntu@ip-172-31-70-248:~$
+$
 ```
 
 The pod is in the compeleted status, and the logs are clear of any errors, which was the condition for the fix.
 
 <br>
 
-_Copyright (c) 2020-2023 RX-M LLC, Cloud Native Consulting, all rights reserved_
-
-[RX-M LLC]: https://rx-m.io/rxm-cnc.svg "RX-M LLC"
+_Copyright (c) 2023-2024 RX-M LLC, Cloud Native & AI Training and Consulting, all rights reserved_
