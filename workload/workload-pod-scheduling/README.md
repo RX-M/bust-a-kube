@@ -1,6 +1,6 @@
 ![RX-M, llc.](https://rx-m.com/rxm-cnc.svg)
 
-# Problem 2 - Pod Scheduling
+# Pod Scheduling
 
 
 ## Context

@@ -1,6 +1,6 @@
 ![RX-M, llc.](https://rx-m.com/rxm-cnc.svg)
 
-# Problem 6 - Application Access
+# Application Access
 
 
 ## Context
