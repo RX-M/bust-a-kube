@@ -14,14 +14,16 @@ runs as expected.
 
 Apply the `problem.yaml` spec to your cluster using the following command:
 
-```
-kubectl apply -f https://raw.githubusercontent.com/RX-M/bust-a-kube/master/workload-2/problem.yaml
+```bash
+kubectl apply -f https://raw.githubusercontent.com/RX-M/bust-a-kube/master/workload/workload-pod-scheduling/problem.yaml
 ```
 
 
 ## Solution Conditions
 
-The pod must be in the running state with all containers ready for this problem to be considered resolved.
+For this problem to be considered resolved:
+
+- The pod must be in the running state with all containers in a ready state
 
 <br>
 

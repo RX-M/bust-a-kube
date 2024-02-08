@@ -11,27 +11,29 @@ analysis of your Kubernetes object definitions. Others are just bad
 configurations for workloads and mostly are used for troubleshooting and
 debugging purposes.
 
-Create a new file `good-pod.yaml` with already fixed deffitiions
+Create a new file `good-pod.yaml` with already fixed definitions
 
 ## Setup
 
 Copy the `problem.yaml` to `good-pod.yaml`
 
 ```bash
-~$ cp problem.yaml good-pod.yaml
+cp problem.yaml good-pod.yaml
 ```
 
 Using `kube-score` perform static code analysis and fix the issues.
 
 Apply the `good-pod.yaml` spec to your cluster using the following command:
 
-```
-kubectl apply -f https://raw.githubusercontent.com/RX-M/bust-a-kube/master/security-2/problem.yaml
+```bash
+kubectl apply -f https://raw.githubusercontent.com/RX-M/bust-a-kube/master/security/security-insecure-configuration/problem.yaml
 ```
 
 ## Solution Conditions
 
-The pod logs must show a listing of pods inside its namespace (in JSON format) for this problem to be considered solved.
+For this problem to be considered solved:
+
+- The pod logs must show a listing of pods inside its namespace (in JSON format)
 
 <br>
 

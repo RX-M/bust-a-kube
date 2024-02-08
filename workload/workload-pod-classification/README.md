@@ -14,14 +14,17 @@ your cluster, identify the problem and repair it so that the pod runs with the `
 
 Apply the `problem.yaml` spec to your cluster using the following command:
 
-```
-kubectl apply -f https://raw.githubusercontent.com/RX-M/bust-a-kube/master/workload-3/problem.yaml
+```bash
+kubectl apply -f https://raw.githubusercontent.com/RX-M/bust-a-kube/master/workload/workload-pod-classification/problem.yaml
 ```
 
 
 ## Solution Conditions
 
-The pod must be in the running state with all containers ready and have the `Guaranteed` QOS Class for this issue to be considered resolved.
+For this problem to be considered resolved:
+
+- The pod must be in the running state with all containers in a ready state
+- The pod must have the `Guaranteed` QOS Class
 
 <br>
 

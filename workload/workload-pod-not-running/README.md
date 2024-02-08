@@ -14,14 +14,16 @@ identify the problem and repair it so that the pod runs as expected.
 
 Apply the `problem.yaml` manifest to your cluster using the following command:
 
-```
-kubectl apply -f https://raw.githubusercontent.com/RX-M/bust-a-kube/master/workload-1/problem.yaml
+```bash
+kubectl apply -f https://raw.githubusercontent.com/RX-M/bust-a-kube/master/workload/workload-pod-not-running/problem.yaml
 ```
 
 
 ## Solution Conditions
 
-The pod must be in the running state with all containers ready for this problem to be considered resolved.
+For this problem to be considered resolved:
+
+- The pod must be in the running state with all containers in a ready state
 
 <br>
 

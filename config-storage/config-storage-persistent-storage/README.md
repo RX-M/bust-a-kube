@@ -1,6 +1,6 @@
 ![RX-M, llc.](https://rx-m.com/rxm-cnc.svg)
 
-# Problem 4 - Persistent Storage
+# Persistent Storage
 
 
 ## Context
@@ -15,14 +15,16 @@ cluster, identify the problem and repair it so that the pod schedules and runs a
 
 Apply the `problem.yaml` spec to your cluster using the following command:
 
-```
-kubectl apply -f https://raw.githubusercontent.com/RX-M/bust-a-kube/master/config-storage-1/problem.yaml
+```bash
+kubectl apply -f https://raw.githubusercontent.com/RX-M/bust-a-kube/master/config-storage/config-storage-persistent-storage/problem.yaml
 ```
 
 
 ## Solution Conditions
 
-The pod must be in the running state with all containers ready for this problem to be considered resolved.
+For this problem to be considered resolved:
+
+- The pod must be in the running state with all containers ready
 
 <br>
 

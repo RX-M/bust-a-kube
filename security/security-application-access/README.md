@@ -17,14 +17,16 @@ Apply the manifest to your cluster, identify the problem and repair it so that t
 
 Apply the `problem.yaml` spec to your cluster using the following command:
 
-```
-kubectl apply -f https://raw.githubusercontent.com/RX-M/bust-a-kube/master/security-1/problem.yaml
+```bash
+kubectl apply -f https://raw.githubusercontent.com/RX-M/bust-a-kube/master/security/security-application-access/problem.yaml
 ```
 
 
 ## Solution Conditions
 
-The pod logs must show a listing of pods inside its namespace (in JSON format) for this problem to be considered solved.
+For this problem to be considered solved:
+
+- The pod logs must show a listing of pods inside its namespace (in JSON format)
 
 <br>
 

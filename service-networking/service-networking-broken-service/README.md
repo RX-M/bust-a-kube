@@ -15,15 +15,16 @@ problem and repair it so that the pods are accessible through the service as exp
 
 Apply the `problem.yaml` spec to your cluster using the following command:
 
-```
-kubectl apply -f https://raw.githubusercontent.com/RX-M/bust-a-kube/master/services-networking-1/problem.yaml
+```bash
+kubectl apply -f https://raw.githubusercontent.com/RX-M/bust-a-kube/master/service-networking/service-networking-broken-service/problem.yaml
 ```
 
 
 ## Solution Conditions
 
-Requests made to the service DNS name or IP address must return the NGINX welcome page for this problem to be considered
-resolved.
+For this problem to be considered resolved:
+
+- Requests made to the service DNS name or IP address must return the NGINX welcome page
 
 
 <br>
