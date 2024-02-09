@@ -24,7 +24,7 @@ wget -qO - https://raw.githubusercontent.com/RX-M/bust-a-kube/master/bash-script
 For this problem to be considered resolved:
 
 - All pods must be in the running state with all containers in a ready state
-- Pod networking must be running and pods must be able to communicate to other pods.
+- Pod networking must be running and pods must be able to communicate with other pods.
 
 To run the solution bash script:
 
