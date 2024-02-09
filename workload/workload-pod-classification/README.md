@@ -1,6 +1,6 @@
 ![RX-M, llc.](https://rx-m.com/rxm-cnc.svg)
 
-# Pod Classification
+# Pod QoS Classes
 
 
 ## Context
