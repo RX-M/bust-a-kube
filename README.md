@@ -26,4 +26,7 @@ Each problem is designed to be independent of one another and can be completed i
 
 
 These problem resources can impact the functioning of you cluster and/or it's applications (they are problems after
-all!). All of the problems are designed to be compatible with recent versions of Kubernetes (1.18+).
+all!). All of the problems are designed to be compatible with recent versions of Kubernetes (1.18+). Some developer
+oriented tools, such as minikube, do not provide a complete implementation of Kubernetes and therefore some bust-a-kube
+challenges may not work. To stand up a suitible single node test cluster, you can run the rx-m k8s.sh script on a plain 
+vannilla Ubuntu system: https://raw.githubusercontent.com/RX-M/classfiles/master/k8s.sh
