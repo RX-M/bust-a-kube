@@ -1,12 +1,14 @@
-# Problem 5 - Pod Classification
+![RX-M, llc.](https://rx-m.com/rxm-cnc.svg)
+
+# Pod Classification
 
 
 ## Solution
 
 After you apply the pod, Run `kubectl describe pod frontend-stable` and confirm the issue. Next to QOS Class, you should see the classification Burstable:
 
-```
-ubuntu@labsys:~$ kubectl describe pod frontend-stable
+```shell
+$ kubectl describe pod frontend-stable
 Name:         frontend-stable
 
 ...
@@ -24,7 +26,7 @@ Events:
   Normal  Created    5s    kubelet, ip-172-31-66-3  Created container frontend-stable
   Normal  Started    5s    kubelet, ip-172-31-66-3  Started container frontend-stable
 
-ubuntu@labsys:~$
+$
 ```
 
 To receive the `Guaranteed` QOS Class from Kubernetes, the following conditions must be met:
@@ -32,9 +34,9 @@ To receive the `Guaranteed` QOS Class from Kubernetes, the following conditions 
 - Every container in the pod must be configured with a resource request and resource limit
 - The resource request and limit values must be the same
 
-Check the `kubectl describe` output again, and look at the container configuration and its resource rqeuests:
+Check the `kubectl describe` output again, and look at the container configuration and its resource requests:
 
-```
+```shell
 Containers:
   frontend-stable:
     Container ID:   docker://4eada74472910436e65619d950c68618abca3f6923194436b9597d6fbc1cc1a6
@@ -69,8 +71,8 @@ To correct this, you need to make the resource request and limits match by adjus
 
 Retrieve the YAML spec from the cluster by using `kubectl get` and the `-o yaml` flag.
 
-```
-ubuntu@labsys:~$ kubectl get pods -o yaml frontend-stable > frontend-fix.yaml
+```shell
+$ kubectl get pods -o yaml frontend-stable > frontend-fix.yaml
 ```
 
 After you retrieve the YAML spec, make the following changes:
@@ -79,8 +81,8 @@ After you retrieve the YAML spec, make the following changes:
 - Remove the `status` key and all of its subkeys
 - Set the value of spec.containers[].resources.limits.cpu to `300m`
 
-```
-ubuntu@labsys:~$ nano frontend-fix.yaml && cat frontend-fix.yaml
+```shell
+$ nano frontend-fix.yaml && cat frontend-fix.yaml
 
 apiVersion: v1
 kind: Pod
@@ -135,31 +137,31 @@ spec:
       defaultMode: 420
       secretName: default-token-fqlsn
 
-ubuntu@labsys:~$
+$
 ```
 
 Resources cannot be edited on a pod that is already running, so to implement the fix you need to remove the existing instance of the pod and recreate it:
 
-```
-ubuntu@labsys:~$ kubectl delete -f frontend-fix.yaml
+```shell
+$ kubectl delete -f frontend-fix.yaml
 
 pod "frontend-stable" deleted
 
-ubuntu@labsys:~$ kubectl apply -f frontend-fix.yaml
+$ kubectl apply -f frontend-fix.yaml
 
 pod/frontend-stable created
 
-ubuntu@labsys:~$
+$
 ```
 
 Now check the pod with `kubectl get` and inspect its QoS Class with `kubectl describe`:
 
-```
-ubuntu@labsys:~$ kubectl get pods
+```shell
+$ kubectl get pods
 
 NAME              READY   STATUS    RESTARTS   AGE
 frontend-stable   1/1     Running   0          83s
-ubuntu@labsys:~$ kubectl describe pod frontend-stable
+$ kubectl describe pod frontend-stable
 Name:         frontend-stable
 Namespace:    default
 Priority:     0
@@ -214,7 +216,7 @@ Events:
   Normal  Created  84s   kubelet, ip-172-31-66-3  Created container frontend-stable
   Normal  Started  83s   kubelet, ip-172-31-66-3  Started container frontend-stable
 
-ubuntu@labsys:~$
+$
 ```
 
 With the pod running with all of its containers ready and the QoS Class of `Guaranteed` assigned to the pod, the issue
@@ -223,6 +225,4 @@ is now resolved!
 
 <br>
 
-_Copyright (c) 2020-2023 RX-M LLC, Cloud Native Consulting, all rights reserved_
-
-[RX-M LLC]: https://rx-m.io/rxm-cnc.svg "RX-M LLC"
+_Copyright (c) 2023-2024 RX-M LLC, Cloud Native & AI Training and Consulting, all rights reserved_

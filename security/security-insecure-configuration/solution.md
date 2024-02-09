@@ -1,6 +1,6 @@
 ![RX-M, llc.](https://rx-m.com/rxm-cnc.svg)
 
-# Application Access
+# Insecure Configuration
 
 
 ## Solution

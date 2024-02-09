@@ -1,4 +1,6 @@
-# Problem 1 - Pods
+![RX-M, llc.](https://rx-m.com/rxm-cnc.svg)
+
+# Pod not running
 
 
 ## Solution
@@ -7,20 +9,20 @@ After you apply the pod, use `kubectl get pods` to view the status. You will see
 and has a status of Init:ImagePullBackOff. Note that the "Init:" prefix implies that this is a failure with
 the init container not one of the normal containers in the pod.
 
-```
-ubuntu@labsys:~$ kubectl get pods
+```shell
+$ kubectl get pods
 
 NAME         READY   STATUS                  RESTARTS   AGE
 debug-pod1   0/1     Init:ImagePullBackOff   0          43s
 
-ubuntu@labsys:~$
+$
 ```
 
 Run `kubectl describe pod debug-pod1` and look at the events. You will see that the Kubelet was unable to pull
 the specified image using the container manager:
 
-```
-ubuntu@labsys:~$ kubectl describe pods debug-pod1
+```shell
+$ kubectl describe pods debug-pod1
 Name:         debug-pod1
 Namespace:    default
 Priority:     0
@@ -41,15 +43,15 @@ Events:
   Warning  Failed     40s (x3 over 80s)  kubelet, sept-b    Error: ErrImagePull
   Normal   BackOff    12s (x4 over 79s)  kubelet, sept-b    Back-off pulling image "alpinelatest"
   Warning  Failed     12s (x4 over 79s)  kubelet, sept-b    Error: ImagePullBackOff
-ubuntu@labsys:~$
+$
 ```
 
 Take a close look at the init container image name. If you check docker hub you will see that no such image exists. The
 init  container image name is incorrect/mis-formated. Change the image name to `alpine` or `alpine:latest` to correct
 the issue.
 
-```
-ubuntu@labsys:~$ nano pod-debug-1.yaml && cat pod-debug-1.yaml
+```shell
+$ nano pod-debug-1.yaml && cat pod-debug-1.yaml
 
 apiVersion: v1
 kind: Pod
@@ -70,34 +72,34 @@ spec:
     command: ["/bin/sh", "-c"]
     args: ["tail -f /dev/null"]
 
-ubuntu@labsys:~$
+$
 ```
 
 You can only edit some of the fields in running pods, and image is not one of them. To apply the fix you will need to
 delete the pod and recreate it. If this pod were created by a deployment or another controller, updating the pod spec
 in the parent resource would perform the update for you.
 
-```
-ubuntu@labsys:~$ kubectl delete -f pod-debug-1.yaml
+```shell
+$ kubectl delete -f pod-debug-1.yaml
 
 pod "debug-pod1" deleted
 
-ubuntu@labsys:~$ kubectl apply -f pod-debug-1.yaml
+$ kubectl apply -f pod-debug-1.yaml
 
 pod/debug-pod1 created
 
-ubuntu@labsys:~$
+$
 ```
 
 Check the pod status with `kubectl get pods` and you should see the pod running:
 
-```
-ubuntu@labsys:~$ kubectl get pods debug-pod1
+```shell
+$ kubectl get pods debug-pod1
 
 NAME         READY   STATUS    RESTARTS   AGE
 debug-pod1   1/1     Running   0          36s
 
-ubuntu@labsys:~$
+$
 ```
 
 You can display the pod logs with `kubectl logs` to verify the log output from the init container.
@@ -105,6 +107,4 @@ You can display the pod logs with `kubectl logs` to verify the log output from t
 
 <br>
 
-_Copyright (c) 2020-2023 RX-M LLC, Cloud Native Consulting, all rights reserved_
-
-[RX-M LLC]: https://rx-m.io/rxm-cnc.svg "RX-M LLC"
+_Copyright (c) 2023-2024 RX-M LLC, Cloud Native & AI Training and Consulting, all rights reserved_
