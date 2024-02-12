@@ -64,7 +64,7 @@ the server pod.
 Apply the `problem.yaml` spec to your cluster using the following command:
 
 ```bash
-kubectl apply -f https://raw.githubusercontent.com/RX-M/bust-a-kube/master/service-networking/network-policy-pod-isolation-problem/problem.yaml
+kubectl apply -f https://raw.githubusercontent.com/RX-M/bust-a-kube/master/service-networking/network-policy-pod-isolation/problem.yaml
 ```
 
 

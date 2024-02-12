@@ -8,7 +8,7 @@
 After you apply the `problem.yaml` spec, a number of resources will be created:
 
 ```shell
-$ kubectl apply -f https://raw.githubusercontent.com/RX-M/bust-a-kube/master/service-networking/network-policy-pod-isolation-problem/problem.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/RX-M/bust-a-kube/master/service-networking/network-policy-pod-isolation/problem.yaml
 namespace/netpolicy-problem created
 pod/server created
 pod/client created
@@ -249,7 +249,7 @@ documents, we are going to modify the original yaml manifest and re-apply it.
 As we have access to the original yaml manifest lets download it and modify it:
 
 ```shell
-$ wget https://raw.githubusercontent.com/RX-M/bust-a-kube/master/service-networking/network-policy-pod-isolation-problem/problem.yaml
+$ wget https://raw.githubusercontent.com/RX-M/bust-a-kube/master/service-networking/network-policy-pod-isolation/problem.yaml
 ...
 problem.yaml                                                    100%[======================================================================================================================================================>]     403  --.-KB/s    in 0s
 
