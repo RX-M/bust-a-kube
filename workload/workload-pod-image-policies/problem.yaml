@@ -8,5 +8,5 @@ spec:
   containers:
   - name: image-pull
     image: busybox:1.36.1
-    imagePullPolicy: Always
+    imagePullPolicy: Never
     command: ["/bin/sh", "-c", "echo image is successfully pulled"]
