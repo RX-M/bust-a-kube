@@ -17,4 +17,4 @@ spec:
   - name: secure-workload-container
     image: nginx:latest
     securityContext:
-      privileged: false
+      privileged: true
