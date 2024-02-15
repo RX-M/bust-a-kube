@@ -5,9 +5,8 @@
 
 ## Context
 
-The pod defined in the `problem.yaml` below creates a pod meant to run a simple echo message in the `busybox` image. The
-pod cannot start. Apply the manifest to your cluster, identify the problem and repair it so that the pod completes as
-expected.
+The pod specified in the `problem.yaml` here creates a container which should write a simple message to stdout using the `busybox` image. 
+The pod fails. Your job is to discover why, fix the problem and ensure that the pod runs successfully. 
 
 
 ## Setup
