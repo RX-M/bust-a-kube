@@ -19,8 +19,7 @@ kubectl apply -f https://raw.githubusercontent.com/RX-M/bust-a-kube/master/workl
 
 For this problem to be considered resolved:
 
-- The pod must run in specific secured namespace
-
+- The pod must be successfully created in the specific secured namespace and stay in the Running state with all containers ready.
 <br>
 
 _Copyright (c) 2023-2024 RX-M LLC, Cloud Native & AI Training and Consulting, all rights reserved_
