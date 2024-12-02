@@ -1,0 +1,36 @@
+#Crossplane Claim Problem 1
+
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: pod-debug-2
+  name: pod-debug-2
+spec:
+  containers:
+  - image: httpd
+    imagePullPolicy: IfNotPresent
+    name: httpd
+    volumeMounts:
+    - name: share
+      mountPath: /var/log/httpd
+  - command:
+    - /fluent-bit/bin/fluent-bit
+    - -i
+    - tail
+    - -p
+    - path=/httpd/access_log
+    - -o
+    - stdout
+    image: fluent/fluent-bit
+    imagePullPolicy: IfNotPresent
+    name: sidecar-logger
+    volumeMounts:
+    - name: share
+      mountPath: /httpd
+  restartPolicy: Never
+  nodeSelector:
+    context: frontend
+  volumes:
+  - emptyDir: {}
+    name: share
