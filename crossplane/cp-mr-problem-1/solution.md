@@ -94,6 +94,15 @@ NAME                               SYNCED   READY   EXTERNAL-NAME               
 rx-m-crossplane-bad-bucket-t46b4   True     True    rx-m-crossplane-bad-bucket-t46b4   72m
 ```
 
+Cleanup:
+
+```
+kubectl delete bucket rx-m-crossplane-bad-bucket-t46b4
+
+bucket.s3.aws.upbound.io "rx-m-crossplane-bad-bucket-t46b4" deleted
+```
+
+
 <br>
 
 _Copyright (c) 2023-2024 RX-M LLC, Cloud Native & AI Training and Consulting, all rights reserved_
