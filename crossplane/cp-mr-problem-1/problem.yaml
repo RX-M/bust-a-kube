@@ -1,4 +1,4 @@
-#Crossplane Claim Problem 1
+#Crossplane MR Problem 1
 
 apiVersion: s3.aws.crossplane.io/v1beta1
 kind: Bucket

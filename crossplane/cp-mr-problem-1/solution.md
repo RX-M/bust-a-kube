@@ -1,6 +1,6 @@
 ![RX-M, llc.](https://rx-m.com/rxm-cnc.svg)
 
-# Crossplane Claim Problem 1
+# Crossplane MR Problem 1
 
 
 ## Solution
