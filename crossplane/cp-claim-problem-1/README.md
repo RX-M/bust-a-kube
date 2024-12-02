@@ -5,7 +5,7 @@
 
 ## Context
 
-The claim in `problem.yaml` is supposed to create an XR (composite resource) but doesn't.
+The `problem.yaml` is supposed to create a MR (managed resource) but doesn't.
 
 
 ## Setup
@@ -29,9 +29,11 @@ kubectl apply -f https://raw.githubusercontent.com/RX-M/bust-a-kube/master/cross
 
 For this problem to be considered resolved:
 
-- The claim must create an S3 bucket
+- You must determine the resource created
+- Ascertain why it is broken
+- Fix it
 
-The solution file (`solution.md`) demonstrates deleting the bucket.
+The solution file (`solution.md`) provides answers and cleans up all created resources.
 
 <br>
 

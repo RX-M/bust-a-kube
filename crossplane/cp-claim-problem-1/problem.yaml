@@ -1,36 +1,64 @@
 #Crossplane Claim Problem 1
 
-apiVersion: v1
-kind: Pod
+apiVersion: s3.aws.crossplane.io/v1beta1
+kind: Bucket
 metadata:
-  labels:
-    run: pod-debug-2
-  name: pod-debug-2
+  generateName: crossplane-bad-bucket-
 spec:
-  containers:
-  - image: httpd
-    imagePullPolicy: IfNotPresent
-    name: httpd
-    volumeMounts:
-    - name: share
-      mountPath: /var/log/httpd
-  - command:
-    - /fluent-bit/bin/fluent-bit
-    - -i
-    - tail
-    - -p
-    - path=/httpd/access_log
-    - -o
-    - stdout
-    image: fluent/fluent-bit
-    imagePullPolicy: IfNotPresent
-    name: sidecar-logger
-    volumeMounts:
-    - name: share
-      mountPath: /httpd
-  restartPolicy: Never
-  nodeSelector:
-    context: frontend
-  volumes:
-  - emptyDir: {}
-    name: share
+  forProvider:
+    region: us-west-1
+    accelerateConfiguration:
+      status: Enabled
+    acl: private
+    corsConfiguration:
+      corsRules:
+        - allowedHeaders:
+            - "*"
+          allowedMethods:
+            - GET
+          allowedOrigins:
+            - "*"
+          exposeHeaders:
+            - x-amz-server-side-encryption
+    lifecycleConfiguration:
+      rules:
+        - expiration:
+            days: 15
+          filter:
+            prefix: ola/
+          status: Enabled
+    locationConstraint: us-east-1
+    objectLockEnabledForBucket: false
+    publicAccessBlockConfiguration:
+      blockPublicPolicy: true
+    replicationConfiguration:
+      roleRef:
+        name: somerole
+      rules:
+        - deleteMarkerReplication:
+            status: Disabled
+          destination:
+            bucketRef:
+              name: repl-dest
+            storageClass: STANDARD
+          filter:
+            prefix: ""
+          id: rule-1
+          priority: 0
+          status: Enabled
+    serverSideEncryptionConfiguration:
+      rules:
+        - applyServerSideEncryptionByDefault:
+            sseAlgorithm: AES256
+    tagging:
+      tagSet:
+        - key: key1
+          value: val1
+        - key: secondKey
+          value: val2
+        - key: key3
+          value: val3
+    versioningConfiguration:
+      status: Enabled
+  providerConfigRef:
+    name: bad-bucket
