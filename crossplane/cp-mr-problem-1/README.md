@@ -16,7 +16,10 @@ Ensure that you have:
 - A local kubeconfig with admin perms
 - Crossplane installed on the cluster
 - A properly configured AWS CLI
-- A properly configured AWS S3 Crossplane Provider (with working ProviderConfig)
+- A properly configured s3.aws.crossplane.io Crossplane Provider (with working ProviderConfig)
+
+**WARNING: These exercises should only be performed on disposable Kubernetes clusters and this particular exercise**
+**will construct small randomly named resources in your AWS environment with a rx-m prefix.**
 
 Apply the `problem.yaml` spec to your cluster using the following command:
 

@@ -1,64 +1,13 @@
 #Crossplane MR Problem 1
 
-apiVersion: s3.aws.crossplane.io/v1beta1
+apiVersion: s3.aws.upbound.io/v1beta1
 kind: Bucket
 metadata:
-  generateName: crossplane-bad-bucket-
+  generateName: rx-m-crossplane-bad-bucket-
 spec:
   forProvider:
-    region: us-west-1
-    accelerateConfiguration:
-      status: Enabled
-    acl: private
-    corsConfiguration:
-      corsRules:
-        - allowedHeaders:
-            - "*"
-          allowedMethods:
-            - GET
-          allowedOrigins:
-            - "*"
-          exposeHeaders:
-            - x-amz-server-side-encryption
-    lifecycleConfiguration:
-      rules:
-        - expiration:
-            days: 15
-          filter:
-            prefix: ola/
-          status: Enabled
-    locationConstraint: us-east-1
-    objectLockEnabledForBucket: false
-    publicAccessBlockConfiguration:
-      blockPublicPolicy: true
-    replicationConfiguration:
-      roleRef:
-        name: somerole
-      rules:
-        - deleteMarkerReplication:
-            status: Disabled
-          destination:
-            bucketRef:
-              name: repl-dest
-            storageClass: STANDARD
-          filter:
-            prefix: ""
-          id: rule-1
-          priority: 0
-          status: Enabled
-    serverSideEncryptionConfiguration:
-      rules:
-        - applyServerSideEncryptionByDefault:
-            sseAlgorithm: AES256
-    tagging:
-      tagSet:
-        - key: key1
-          value: val1
-        - key: secondKey
-          value: val2
-        - key: key3
-          value: val3
-    versioningConfiguration:
-      status: Enabled
-  providerConfigRef:
-    name: bad-bucket
+    region: us-west-6
+    objectLockEnabled: true
+    tags:
+      Name: bad-bucket
+      Vendor: RX-M
