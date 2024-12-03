@@ -1,13 +1,13 @@
 ![RX-M, llc.](https://rx-m.com/rxm-cnc.svg)
 
-# Crossplane XR Problem 1
+# Crossplane XR Problem 2
 
 
 ## Context
 
 The `problem.yaml` is supposed to create a XR (Composite Resource) but doesn't correctly.
 
-> Hint: This is a Platform User problem.
+> Hint: This is a Platform Ops problem.
 
 
 ## Setup
@@ -26,7 +26,7 @@ Ensure that you have:
 Apply the `problem.yaml` spec to your cluster using the following command:
 
 ```bash
-kubectl apply -f https://raw.githubusercontent.com/RX-M/bust-a-kube/master/crossplane/cp-xr-problem-1/problem.yaml
+kubectl apply -f https://raw.githubusercontent.com/RX-M/bust-a-kube/master/crossplane/cp-xr-problem-2/problem.yaml
 ```
 
 
@@ -34,8 +34,8 @@ kubectl apply -f https://raw.githubusercontent.com/RX-M/bust-a-kube/master/cross
 
 For this problem to be considered resolved:
 
-- You must determine why the Claim failed
-- Fix it and create the XR
+- You must determine why the XR is failing
+- Fix it and use the existing Claim to create the resource
 
 The solution file (`solution.md`) provides answers and cleans up all created resources.
 

@@ -1,0 +1,110 @@
+#Crossplane XR Problem 1
+
+apiVersion: apiextensions.crossplane.io/v1
+kind: CompositeResourceDefinition
+metadata:
+  name: bucketfarms.bak.rx-m.com
+spec:
+  group: bak.rx-m.com
+  names:
+    kind: BucketFarm
+    plural: bucketfarms
+  versions:
+  - name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        type: object
+        properties:
+          spec:
+            type: object
+            properties:
+              location:
+                type: string
+                oneOf:
+                  - pattern: '^EAST$'
+                  - pattern: '^WEST$'
+            required:
+              - location
+    served: true
+    referenceable: true
+  claimNames:
+    kind: BucketFarmClaim
+    plural: bucketfarmclaims
+
+---
+
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: bucket-farm
+spec:
+  mode: Pipeline
+  pipeline:
+  - step: patch-and-transform
+    functionRef:
+      name: function-patch-and-transform
+    input:
+      apiVersion: pt.fn.crossplane.io/v1beta1
+      kind: Resources
+      resources:
+        - name: s3Bucket
+          base:
+            apiVersion: s3.aws.upbound.io/v1beta1
+            kind: Bucket
+            metadata:
+              name: rx-m-crossplane-xr-badbucket-1
+            spec:
+              forProvider:
+                region: us-west-1
+              providerConfigRef:
+                name: default
+          patches:
+            - type: FromCompositeFieldPath
+              fromFieldPath: "spec.location"
+              toFieldPath: "spec.forProvider.region"
+              transforms:
+                - type: map
+                  map:
+                    EAST: "us-east-2"
+                    WEST: "us-west-1"
+        - name: s3Bucket
+          base:
+            apiVersion: s3.aws.upbound.io/v1beta1
+            kind: Bucket
+            metadata:
+              name: rx-m-crossplane-xr-badbucket-2
+            spec:
+              forProvider:
+                region: us-east-2
+              providerConfigRef:
+                name: default
+          patches:
+            - type: FromCompositeFieldPath
+              fromFieldPath: "spec.location"
+              toFieldPath: "spec.forProvider.region"
+              transforms:
+                - type: map
+                  map:
+                    EAST: "us-east-2"
+                    WEST: "us-west-1"
+  compositeTypeRef:
+    apiVersion: bak.rx-m.com/v1alpha1
+    kind: BucketFarm
+
+---
+
+apiVersion: pkg.crossplane.io/v1
+kind: Function
+metadata:
+  name: function-patch-and-transform
+spec:
+  package: xpkg.upbound.io/crossplane-contrib/function-patch-and-transform:v0.1.4
+
+---
+
+apiVersion: bak.rx-m.com/v1alpha1
+kind: BucketFarmClaim
+metadata:
+  name: all-the-buckets
+spec: 
+  location: "WEST1"
