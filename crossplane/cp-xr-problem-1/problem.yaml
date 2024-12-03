@@ -107,4 +107,4 @@ kind: BucketFarmClaim
 metadata:
   name: all-the-buckets
 spec: 
-  location: "WURST"
+  location: "WEST1"
